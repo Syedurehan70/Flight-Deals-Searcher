@@ -11,8 +11,11 @@ header = {
 
 
 class FlightSearch:
+
     # This class is responsible for talking to the Flight Search API.
-    def get_destination_code(self, name):  # getting city's iata code, returning it to main.py
+    def get_destination_code(self, name):
+
+        # getting city's iata code, returning it to main.py
         location_endpoint = f"{kiwi_endpoint}/locations/query"
         loc_params = {
             "term": name,
@@ -22,7 +25,9 @@ class FlightSearch:
         location_code = code_response.json()['locations'][0]['code']
         return location_code
 
-    def search_with_zero_stops(self, dest, tom, to):  # searching for available flights b/w defined period
+    def search_with_zero_stops(self, dest, tom, to):
+
+        # searching for available flights b/w defined period
         self.search_endpoint = f"{kiwi_endpoint}/v2/search"
         self.search_para = {
             "fly_from": "LON",
@@ -44,7 +49,8 @@ class FlightSearch:
         except IndexError:  # if no flights were found
             print(f"No direct flights were found for {dest}.")
             return None
-# saving the returning data to a new class, to use
+
+        # saving the returning data to a new class, to use
         flight_data = FlightData(
             city_from=path['route'][0]['cityFrom'],
             from_airport=path['route'][0]['flyFrom'],
@@ -56,7 +62,8 @@ class FlightSearch:
             stop_overs=0,
             via_city="",
         )
-# printing the city and price on console and returning it to main.py as well
+
+        # printing the city and price on console and returning it to main.py as well
         print(f"{flight_data.city_to}: £{flight_data.price}")
         return flight_data
 
@@ -81,5 +88,6 @@ class FlightSearch:
             stop_overs=1,
             via_city=path["route"][0]["cityTo"],
         )
+
         print(f"{flight_data.city_to}: £{flight_data.price}")
         return flight_data

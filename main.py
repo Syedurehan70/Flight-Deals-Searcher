@@ -4,7 +4,7 @@
 from data_manager import DataManager
 from notification_manager import NotificationManager
 from flight_search import FlightSearch
-from pprint import pprint
+# from pprint import pprint
 import datetime as dt
 
 
@@ -38,7 +38,8 @@ for code in data:
 # for every row data in (updated) data, search flights
 for i in data:
     flight = flight_search.search_with_zero_stops(dest=i['iataCode'], tom=tom_date, to=six_months_date)
-    if flight != None:
+
+    if flight is not None:
         if i['lowestPrice'] > flight.price:
             notify.send_mail(data=data,
                              price=flight.price,
@@ -50,9 +51,11 @@ for i in data:
                              in_date=flight.return_date,
                              stop_overs=flight.stop_overs,
                              via_city=flight.via_city)
+
     else:
         stop_over_flight = flight_search.search_with_one_stop(dest=i['iataCode'])
-        if stop_over_flight != None:
+
+        if stop_over_flight is not None:
             if i['lowestPrice'] > stop_over_flight.price:
                 notify.send_mail(data=data,
                                  price=stop_over_flight.price,
@@ -65,5 +68,3 @@ for i in data:
                                  stop_overs=stop_over_flight.stop_overs,
                                  via_city=stop_over_flight.via_city)
 
-# pprint(data)
-# last steps, compare the prices if lower than saved one's send email, and and comments to it

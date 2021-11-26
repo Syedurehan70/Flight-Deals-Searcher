@@ -7,12 +7,15 @@ class DataManager:
 
     # This class is responsible for talking to the Google Sheet.
     def get(self):
+
         # getting data from google sheets and turning it in json format for use, returning to main.py
         get_response = requests.get(url=get_endpoint)
         get_data = get_response.json()['prices']
         return get_data
 
-    def test(self, iata, id):  # putting the info in sheet
+    def test(self, iata, id):
+        # putting the info in sheet
+
         put_endpoint = f"{get_endpoint}/{int(id)}"
         para = {
             "price": {

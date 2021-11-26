@@ -31,6 +31,7 @@ class NotificationManager:
                 message = f"Subject:Low Price Alert! \n\nOnly {price}GBP to fly from {depart_city}-{depart_city_air}" \
                           f" to {arrival_city}-{arrival_city_air}, from {out_date} to {in_date}.\n\n Flight has" \
                           f" {stop_overs} stop over, via {via_city} City"
+
                 # sending mail, before \n\n there's a  subject and after there is a body of code
                 connection.sendmail(from_addr=MY_EMAIL,
                                     to_addrs=RECEIVERS_EMAIL,

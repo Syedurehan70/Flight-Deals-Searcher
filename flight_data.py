@@ -1,4 +1,7 @@
-class FlightData:  # saving all the fetched data to this class to use anywhere in program
+class FlightData:
+
+    # saving all the fetched data to this class to use anywhere in program
+
     def __init__(self, city_from, from_airport, city_to, to_airport, price, out_date, return_date, stop_overs,
                  via_city):
         self.city_from = city_from
